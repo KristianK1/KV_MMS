@@ -1,4 +1,7 @@
-function files = readFilePaths(foldersToExclude, extention)
+function files = readFilePaths(initialPath, foldersToExclude, extention)
+    if(initialPath == 1)
+        cd "voices_repo\testData";
+    end
     %files = string([50000,1]);
     resultSize = 0;
     dirs = dir;
@@ -7,17 +10,17 @@ function files = readFilePaths(foldersToExclude, extention)
     for i=1:N
         if(dirs(i).isdir == true)
             tempSize = size(foldersToExclude);
-            NfoldersEx = tempSize(1,1)
+            NfoldersEx = tempSize(1,1);
             excludeThis = 0;
             for j=1:NfoldersEx
-                if strcat(dirs(i).name, foldersToExclude(j)==true)
+                if strcmp(dirs(i).name, foldersToExclude(j))
                     excludeThis = 1;
                 end
             end
             if(excludeThis == 0)
                 cd(dirs(i));
-                    filesFromFolder = readFilePaths(foldersToExclude, extention);
-                    files = [files; filesFromFolder];
+                    filesFromFolder = readFilePaths(0, foldersToExclude, extention);
+                    files = [files; filesFromFolder]
                 cd ..
             end
         elseif endsWith(dirs(i).name, extention) == true
