@@ -33,28 +33,29 @@ function files = readFilePaths(initialPath, foldersToExclude, extention)
     files = strings([0,1]);
     for i=1:N
         if(dirs(i).isdir == true)
-            tempSize = size(foldersToExclude)
+            tempSize = size(foldersToExclude);
             NfoldersEx = tempSize(1,2);
             excludeThis = 0;
-            dirs(i).name
+            %dirs(i).name
             if strcmp(dirs(i).name, ".") || strcmp(dirs(i).name, "..")
                 excludeThis = 1;
-                "remove " + dirs(i).name
+                %"remove " + dirs(i).name
             end
             for j=1:NfoldersEx
                 if strcmp(dirs(i).name, foldersToExclude(j))
                     excludeThis = 1;
-                    "remove " + dirs(i).name
+                    %"remove " + dirs(i).name
                 end
                 
             end
             if(excludeThis == 0)
-                path = initialPath + "\" + dirs(i).name
+                path = initialPath + "\" + dirs(i).name;
                 filesFromFolder = readFilePaths(path, foldersToExclude, extention);
                 files = [files; filesFromFolder];
             end
         elseif endsWith(dirs(i).name, extention) == true
-            files = [files; dirs(i).name];
+            newFilePath = initialPath + "\" + dirs(i).name;
+            files = [files; newFilePath];
         else
             "some useless file"
             dirs(i).name

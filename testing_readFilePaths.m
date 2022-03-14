@@ -6,5 +6,5 @@ result = readFilePaths(initialPath, folders, "mp3")
 sizeArray = size(result);
 sizeArray = sizeArray(1,1);
 for i=1:sizeArray
-    result(i)
+    result(i);
 end

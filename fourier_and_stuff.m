@@ -22,7 +22,7 @@ tempSize = size(dirs);
 N_of_files = tempSize(1,1);
 for i=1:N_of_files
     if endsWith(dirs(i).name, "mp3") == true
-        dirs(i);
+        dirs(i)
         [y,Fs] = audioread(dirs(i).name);
         fourier = fft(y);
         fourier = abs(fourier);
