@@ -38,3 +38,4 @@ for i=1:samples
         plot(newF, listaQ);
     end
 end
+% multimedijski sustavi
