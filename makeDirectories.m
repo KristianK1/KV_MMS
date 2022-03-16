@@ -5,7 +5,7 @@ function makeDirectories(destination, folders)
     sizee = size(folders);
     sizee = sizee(1,1);
     for i=1:sizee
-        directoryPath = destination + "\" + folders(i,1)
+        directoryPath = destination + "\" + folders(i,1);
         if ~exist(directoryPath, 'dir')
             mkdir(directoryPath);
         end

@@ -1,10 +1,11 @@
 clc
-clear all
+clearvars -except excel_data
 
-excel_folderPath = "D:\KV_MMS\validated_fitlered_age_gender_first_50000.xlsx";
+%excel_folderPath = "D:\KV_MMS\validated_fitlered_age_gender_first_50000.xlsx";
 excel_folderPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\validated.tsv";
-files_currentPath = "D:\Downloads\en\en\clips";
-files_destinationPath = "D:\KV_MMS\voices_repo\test_filtering";
+
+files_currentPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\clips";
+files_destinationPath = "D:\KV_MMS\voices_repo\mozilla8";
 
 if ~isfile(excel_folderPath)
     ME = MException("MATLAB:test", "Navedena datoteka ne postoji");
@@ -12,52 +13,73 @@ if ~isfile(excel_folderPath)
 end
 
 genders = ["male", "female"];
-ageGroup = ["teens", "twenties", "thirties", "fourties", "fifties", "sixties", "seventies", "eighties", "nineties"];
-folders = {genders; ageGroup};
+ageGroups = ["teens", "twenties", "thirties", "fourties", "fifties", "sixties", "seventies", "eighties", "nineties"];
+folders = {genders; ageGroups};
 folderNames = combineFolderNames(folders);
 
 makeDirectories(files_destinationPath, folderNames);
+try
+    excel_data(1,1)
+catch
+    "ponovo hvatam podatke iz excela"
+    excel_data = tdfread(excel_folderPath, "\t");
+end
 
-excel_data = tdfread(excel_folderPath, "\t");
-
-N = size(excel_data)
+N = size(excel_data.path)
 N = N(1,1);
+"ucitano"
 
-for i=2:N
-    pause(1);
-    if(mod(i,100000)==0)
-        i/N*100;
+
+
+
+for i=1:N
+    
+    if(mod(i,10000)==0)
+        i/N*100
     end
     try
-        ageGroup = "";
-        gender = "";
-        excel_data_now = excel_data(i,:);
-        file_name = excel_data_now.(2) + ".mp3";
+
+
+        file_name = excel_data.path(i,:);
+        file_name = file_name(find(~isspace(file_name)));
+        
+        
+        age = excel_data.age(i,:);
+        age = age(find(~isspace(age)));
+
+        gender = excel_data.gender(i,:);
+        gender = gender(find(~isspace(gender)));
+
+        if strcmp("", gender) || strcmp("", age)
+            continue;
+        end
 
         for ii=1:9
-            if(strcmp(ages(ii), excel_data_now.(6)))
-                ageGroup = ages(ii);
+            if strcmp(ageGroups(ii), age)
+                ageGroupWrite = ageGroups(ii);
+                break;
             end
         end
 
         for ii=1:2
-            if(strcmp(genders(ii), excel_data_now.(7)))
-                gender = genders(ii);
+            if strcmp(genders(ii), gender)
+                genderWrite = genders(ii);
+                break
             end
         end
-        if(strcmp("", gender) || strcmp("", ageGroup))
+
+        if strcmp("", genderWrite) || strcmp("", ageGroupWrite)
             continue;
         end
 
+        
         s = files_currentPath + "\" + file_name;
-        d = files_destinationPath + "\" + gender + "\" + ageGroup;
+        d = files_destinationPath + "\" + genderWrite + "\" + ageGroupWrite;
         copyfile(s,d);
-
+        %pause(2);
     catch error
         "fejlo sam na liniji " + i
+        rethrow(error);
     end
-    %rethrow(error);
 end
-
-
-%}
+"end"
