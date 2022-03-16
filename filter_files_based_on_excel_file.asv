@@ -2,7 +2,7 @@ clc
 clear all
 
 excel_folderPath = "D:\KV_MMS\validated_fitlered_age_gender_first_50000.xlsx";
-excel_folderPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\validated.tsv";
+"D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\vali
 files_currentPath = "D:\Downloads\en\en\clips";
 files_destinationPath = "D:\KV_MMS\voices_repo\test_filtering";
 
@@ -18,7 +18,7 @@ folderNames = combineFolderNames(folders);
 
 makeDirectories(files_destinationPath, folderNames);
 
-excel_data = tdfread(excel_folderPath, "\t");
+excel_data = readtable(excel_folderPath);
 
 N = size(excel_data)
 N = N(1,1);
