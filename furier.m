@@ -1,4 +1,4 @@
-function [amplitudes, freqs] = furier(y, Fs)
+function [freqs, amplitudes] = furier(y, Fs)
     fourier = fft(y);
     tempSize = size(fourier);
     sizee = tempSize(1);
