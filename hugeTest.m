@@ -12,7 +12,7 @@ resultM = readFilePaths(initialPath, foldersM, "mp3");
 resultM = resultM(randperm(numel(resultM)));
 
 
-wantedSamples = 5000;
+wantedSamples = 1000;
 sizee = size(resultM);
 sizee = sizee(1,1);
 
