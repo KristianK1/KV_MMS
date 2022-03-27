@@ -9,5 +9,4 @@ function [freqs, aps] = highPassFilter(freqs, aps, cutoff)
             break
         end
     end
-
 end

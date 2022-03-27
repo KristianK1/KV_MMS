@@ -1,4 +1,4 @@
-function P = signalPower(a,f, minF, maxF)
+function P = signalPower(f,a, minF, maxF)
 sizee = size(a);
 sizee=sizee(1,1);
 P = 0;
@@ -7,4 +7,3 @@ for i=1:sizee
         P = P + a(i)*a(i);
     end
 end
-P = sqrt(P);
