@@ -3,11 +3,18 @@ clear all
 initialPath ="D:\KV_MMS\voices_repo\mozilla8";
 
 
+
 genders = ["male", "female"];
 ageGroups = ["teens", "twenties", "thirties", "fourties", "fifties", "sixties", "seventies", "eighties", "nineties"];
-results = {};
 
 destination = "D:\KV_MMS\voices_repo\mozilla8_loaded";
+
+genders = ["male", "female"];
+ageGroups = ["teens", "twenties", "thirties", "fourties", "fifties", "sixties", "seventies", "eighties", "nineties"];
+folders = {genders; ageGroups};
+folderNames = combineFolderNames(folders);
+
+makeDirectories(destination, folderNames);
 
 for i=1:2
     for j=1:9
@@ -15,19 +22,19 @@ for i=1:2
         dirs = dir(path);
         sizee = size(dirs);
         sizee = sizee(1,1);
+        results = {};
         for k=1:sizee
+            
             if endsWith(dirs(k).name,".mp3")
                 if(mod(k,100)==0)
-                    k/sizee
+                    percentage = k/sizee*100
+                    k
                 end
-                k
-                name = path + "\" + dirs(k).name
+                name = path + "\" + dirs(k).name;
                 [y,Fs] = audioread(name, "double");
                 time = size(y);
                 time = time(1,1);
                 time = time/Fs;
-                sound(y,Fs);
-                pause(time+1)
                 
                 fur = fft(y);
                 result = {time, Fs, fur};
@@ -35,9 +42,17 @@ for i=1:2
                 
             end
 
+            if(mod(k, 100)==0 && k~=0)
+                filename = destination + "\"+ genders(i) + "\" +ageGroups(j) + "\" + "mp3_to_variables" + "_" + k +".mat";
+                save(filename, "results");
+                results = {};
+            elseif k==sizee
+                filename = destination + "\"+ genders(i) + "\" +ageGroups(j) + "\" + "mp3_to_variables" + "_" + k +".mat";
+                save(filename, "results");
+                results = {};
+            end
         end
         
-        filename = mp3_to_variables + "_" + genders(i) + "_"+ ageGroups(j);
     end
 end
 

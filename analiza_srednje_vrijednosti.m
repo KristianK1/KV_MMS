@@ -1,9 +1,10 @@
 clc
 clearvars -except result
-folders = ["male","teens"];
-%initialPath ="D:\KV_MMS\voices_repo\children";
-initialPath ="D:\KV_MMS\voices_repo\mozilla8";
-result = readFilePaths(initialPath, folders, "mp3");
+%folders = ["male","teens"];
+folders = [""];
+initialPath ="D:\KV_MMS\voices_repo\children";
+%initialPath ="D:\KV_MMS\voices_repo\mozilla8";
+result = readFilePaths(initialPath, folders, "wav");
 "readPaths"
 result = result(randperm(numel(result)));
 Nsamples = 0;
@@ -29,12 +30,14 @@ for i=1:samples
     Nsamples = Nsamples + 1;
     [f,a] = furier(y,Fs);
     [f,a] = lowPassFilter(f,a,1000);
+    [f,a] = highPassFilter(f,a,50);
+    
     [newF, newA] = freqScaling(f,a,0.5, 1000);
     [newF, newA] = powerScaling(newF,newA,1);
     lista = [lista newA];
 end
 
-listaQ = lista .* lista;
+listaQ = lista;% .* lista;
 listaQ = transpose(sum(transpose(listaQ)));
 listaQ = listaQ./Nsamples;
 listaQ = listaQ .^0.5;

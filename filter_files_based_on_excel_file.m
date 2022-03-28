@@ -5,7 +5,7 @@ clearvars -except excel_data
 excel_folderPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\validated.tsv";
 
 files_currentPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\clips";
-files_destinationPath = "D:\KV_MMS\voices_repo\mozilla8";
+files_destinationPath = "D:\KV_MMS\voices_repo\mozilla8_repeat";
 
 if ~isfile(excel_folderPath)
     ME = MException("MATLAB:test", "Navedena datoteka ne postoji");
@@ -38,7 +38,8 @@ for i=1:N
         i/N*100
     end
     try
-
+        ageGroupWrite = "";
+        genderWrite = "";
 
         file_name = excel_data.path(i,:);
         file_name = file_name(find(~isspace(file_name)));
