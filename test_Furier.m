@@ -17,6 +17,7 @@ for i = 1:sizee
     %sound(y, Fs);
     [a, f] = furier(y,Fs);
     
+    break
     %[f,a] = lowPassFilter(f,a,1000);
     %[f,a] = highPassFilter(f,a,65);
     %filtered = ifft(y);
