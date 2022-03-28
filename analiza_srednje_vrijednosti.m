@@ -1,10 +1,12 @@
 clc
-clearvars -except result
+clearvars -except listaQM
 %folders = ["male","teens"];
-folders = [""];
-initialPath ="D:\KV_MMS\voices_repo\children";
-%initialPath ="D:\KV_MMS\voices_repo\mozilla8";
-result = readFilePaths(initialPath, folders, "wav");
+folders = ["female"];
+%initialPath ="D:\KV_MMS\voices_repo\children";
+%initialPath ="D:\KV_MMS\voices_repo\mozilla8"; %PC Kristian
+initialPath ="C:\KV_MMS\voices_repo\mozilla_stuff"; %laptop Kristian
+
+result = readFilePaths(initialPath, folders, "mp3");
 "readPaths"
 result = result(randperm(numel(result)));
 Nsamples = 0;
@@ -20,7 +22,7 @@ else
 end
 samples
 for i=1:samples
-    
+    i
     [y,Fs] = audioread(result(i), "double");
     time = size(y);
     time = time(1,1)/Fs;
@@ -37,6 +39,7 @@ for i=1:samples
     lista = [lista newA];
 end
 
+
 listaQ = lista;% .* lista;
 listaQ = transpose(sum(transpose(listaQ)));
 listaQ = listaQ./Nsamples;
@@ -44,6 +47,6 @@ listaQ = listaQ .^0.5;
 figure
 plot(newF, listaQ);
 
-title("osim " + folders(1,1) + " and "  +folders(1,2));
+%title("osim " + folders(1,1) + " and "  +folders(1,2));
 
-snagaProsjeka = signalPower(newF, listaQ, 0,-1)
+snagaProsjeka = signalPower(newF, listaQ, 0,-1);
