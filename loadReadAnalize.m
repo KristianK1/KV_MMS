@@ -1,13 +1,14 @@
 function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, minF, maxF)
 %(path, folders, ext, N, freqStep, minF, maxF)
     outputSize = 0;
+    cmnExist = 0;
 
     cd citanje/
     files = readFilePaths(path, folders, ext);
     files = files(randperm(numel(files)));
     cd ../
     "ocitao";
-    results = {};
+    results = zeros(0,(maxF - minF)/freqStep);
     cd obrada\
     sizee = size(files);
     sizee = sizee(1,1);
@@ -17,7 +18,7 @@ function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, m
     else
         samples = N*2;
     end
-    files = files(1:samples, 1)
+    files = files(1:samples, 1);
     
     for i=1:samples
         if(mod(i,100) == 0)
@@ -35,11 +36,12 @@ function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, m
         [f,a] = freqScaling(f,a, freqStep, maxF);
         [f,a] = powerScaling(f, a, 1);
         
-        if(i == 1)
+        if cmnExist == 0
+            cmnExist = 1;
             commonF = f;
         end
         if isequal(commonF, f)
-            results = [results;a];
+            results = [results a];
             outputSize = outputSize + 1;
             if(outputSize >= N)
                 break

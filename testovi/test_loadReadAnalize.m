@@ -1,22 +1,17 @@
 clear all
 clc
 
-
 path ="D:\KV_MMS_voices_repo\mozilla8_repeat\"; %PC Kristian
 foldersIgnore = [""];
 
-N = 50;
+N = 10000;
 [rez,f] = loadReadAnalize(path, foldersIgnore, ".mp3", N, 0.5,61,4000);
 
-sizee = size(rez);
-sizee = sizee(1,1)
-
-sum = averageFreq(f, rez{i,1});
-
-cd obrada\
-for i=2:N
-    sum = sum + averageFreq(f, rez{i,1});
+%{
+figure
+hold on
+for i=1:N
+    subplot(4,5,i);
+    plot(f, rez{i,1})
 end
-cd ..\
-sum = sum./N;
-plot(f,sum)
+%}
