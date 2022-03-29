@@ -46,7 +46,7 @@ while (Nsamples < wantedSamples)
     [newF, newA] = freqScaling(f,a,5, 500);
     [newF, newA] = powerScaling(newF,newA,1);
     %avg=averageFreq(newF, newA);
-    avg=FindLowPowerBand(newF, newA, 0.02);
+    avg=FindLowPowerBand(newF, newA, 0.2);
     avgs = avgs + avg;
    
 end
@@ -59,4 +59,4 @@ end
 figure
 plot(newF, avgs);
 
-%title("osim " + folders(1,1) + " and "  +folders(1,2));
+title("osim " + folders(1,1) + " and "  +folders(1,2));
