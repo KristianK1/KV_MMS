@@ -7,9 +7,5 @@ function [freqs, amplitudes] = furier(y, Fs)
     
     freqs  = [0:1/(sizee-1)*Fs: 0.5*Fs];
     freqs = transpose(freqs);
-    %if(size(freqs) ~= size(amplitudes))
-        %"ne valja"
-    %else
-        %"valja"
-    %end
+
 end

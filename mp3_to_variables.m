@@ -1,16 +1,12 @@
 clc
 clear all
-initialPath ="D:\KV_MMS\voices_repo\mozilla8";
-
-
+initialPath ="D:\KV_MMS\voices_repo\mozilla8_repeat";
 
 genders = ["male", "female"];
 ageGroups = ["teens", "twenties", "thirties", "fourties", "fifties", "sixties", "seventies", "eighties", "nineties"];
 
 destination = "D:\KV_MMS\voices_repo\mozilla8_loaded";
 
-genders = ["male", "female"];
-ageGroups = ["teens", "twenties", "thirties", "fourties", "fifties", "sixties", "seventies", "eighties", "nineties"];
 folders = {genders; ageGroups};
 folderNames = combineFolderNames(folders);
 
@@ -28,7 +24,6 @@ for i=1:2
             if endsWith(dirs(k).name,".mp3")
                 if(mod(k,100)==0)
                     percentage = k/sizee*100
-                    k
                 end
                 name = path + "\" + dirs(k).name;
                 [y,Fs] = audioread(name, "double");

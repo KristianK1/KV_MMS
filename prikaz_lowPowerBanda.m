@@ -1,7 +1,7 @@
 clc
 clearvars -except femaleAvg
 folders = ["female","teens"];
-%initialPath ="D:\KV_MMS\voices_repo\children";clc
+%initialPath ="D:\KV_MMS\voices_repo\children";
 initialPath ="D:\KV_MMS\voices_repo\mozilla8";
 result = readFilePaths(initialPath, folders, "mp3");
 "readPaths"

@@ -5,6 +5,4 @@ function [freqs, aps] = lowPassFilter(freqs, aps, cutoff)
     limit = round(sizeF*cutoff/maxF);
     freqs = freqs(1:limit,1);
     aps = aps(1:limit,1);
-    
-
 end

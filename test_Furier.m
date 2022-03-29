@@ -13,22 +13,7 @@ for i = 1:sizee
     end
     result(i);
     [y,Fs] = audioread(result(i), "double");
-    
-    %sound(y, Fs);
     [a, f] = furier(y,Fs);
-    
     break
-    %[f,a] = lowPassFilter(f,a,1000);
-    %[f,a] = highPassFilter(f,a,65);
-    %filtered = ifft(y);
-    %sound(y,Fs);
 
-    %sizee = size(a);
-    %sizee=sizee(1,1);
-    
-    %plot(f,a)
-    %sizeY = size(y);
-    %sizeY = sizeY(1,1)/Fs;
-    %pause(round(sizeY)+2);
-    %pause(1);
 end
