@@ -22,7 +22,7 @@ function files = readFilePaths(initialPath, foldersToExclude, extention)
 %drugi argument je tipa
 %q = ["female", "teens", "ime_foldera"];
 %pravilo je da ignorira SVE foldere s tim imenom, cak i ako je folder
-%nalazi unutar "dopustenog" folfera
+%nalazi unutar "dopustenog" foldera
 
 %treci argument je tipa
 %q= "mp3" (ili ".mp3")
