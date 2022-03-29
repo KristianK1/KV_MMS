@@ -41,7 +41,7 @@ function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, m
         if isequal(commonF, f)
             results = [results;a];
             outputSize = outputSize + 1;
-            if(outputSize > N)
+            if(outputSize >= N)
                 break
             end
         else
