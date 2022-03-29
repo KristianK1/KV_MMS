@@ -6,7 +6,7 @@ function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, m
     files = readFilePaths(path, folders, ext);
     files = files(randperm(numel(files)));
     cd ../
-
+    "ocitao";
     results = {};
     cd obrada\
     sizee = size(files);
