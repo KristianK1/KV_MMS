@@ -1,6 +1,6 @@
 *.mp3
 *.wav
-corrCoef_analiza.m
+*.asv
 rezultati/bigResult/loadReadAnalizeResult_F_50000_4Hz.mat
 rezultati/bigResult/loadReadAnalizeResult_F_50000_4Hz_freqs.mat
 rezultati/bigResult/loadReadAnalizeResult_M_50000_4Hz.mat

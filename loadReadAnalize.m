@@ -12,11 +12,11 @@ function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, m
     cd obrada\
     sizee = size(files);
     sizee = sizee(1,1);
-    if(sizee<N*2)
+    if(sizee<N*1.25)
         samples = sizee;
         "Dostupno je samo " + samples + " uzoraka."
     else
-        samples = N*2;
+        samples = round(N*1.25);
     end
     files = files(1:samples, 1);
     
@@ -25,6 +25,7 @@ function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, m
             outputSize/N
         end
         [y,Fs] = audioread(files(i), "double");
+        y = y(:,1);
         sizeY = size(y);
         sizeY = sizeY(1,1);
         if sizeY/Fs < (1/freqStep)
