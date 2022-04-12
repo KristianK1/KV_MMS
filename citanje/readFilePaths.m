@@ -53,7 +53,7 @@ function files = readFilePaths(initialPath, foldersToExclude, extention)
                 filesFromFolder = readFilePaths(path, foldersToExclude, extention);
                 files = [files; filesFromFolder];
             end
-        elseif endsWith(dirs(i).name, extention) == true
+        elseif contains(dirs(i).name, extention) == true
             newFilePath = initialPath + "\" + dirs(i).name;
             files = [files; newFilePath];
         else

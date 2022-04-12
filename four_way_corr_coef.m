@@ -1,17 +1,18 @@
 clearvars -except rezFSum rezMSum rezCMSum rezCFSum f1 f2 f3 f4
 clc
 
-%path ="D:\KV_MMS_voices_repo\mozilla8_repeat\"; %PC Kristian
-path = "C:\KV_MMS_voices_repo\mozilla_stuff\"; %Lenovo Kristian
-pathChi = "C:\KV_MMS_voices_repo\laki\"; %Lenovo Kristian
+%path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
+path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
+pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
 
-N = 2000;
+N = 5000;
 FMIN = 62;
-FMAX = 1800;
-Fstep = 0.5;
+FMAX = 2000;
+Fstep = 1;
 
 if ~exist('rezMSum', 'var')
     "ponovo"
+    
     [rezM, f1] = loadReadAnalize(path, ["female"], ".mp3", N, Fstep, FMIN, FMAX);
     rezMsize = size(rezM);
     rezMsize = rezMsize(1,2)
@@ -22,12 +23,12 @@ if ~exist('rezMSum', 'var')
     rezFsize = rezFsize(1,2)
     rezFSum = transpose(sum((transpose(rezF)))) ./ rezFsize;
     
-    [rezCM, f3] = loadReadAnalize(pathChi, ["female"], ".mp3", N, Fstep, FMIN, FMAX);
+    [rezCM, f3] = loadReadAnalize(pathChi, ["female"], ".", N, Fstep, FMIN, FMAX);
     rezCMsize = size(rezCM);
     rezCMsize = rezCMsize(1,2)
     rezCMSum = transpose(sum((transpose(rezCM)))) ./ rezCMsize;
     
-    [rezCF, f4] = loadReadAnalize(pathChi, ["male"], ".mp3", N, Fstep, FMIN, FMAX);
+    [rezCF, f4] = loadReadAnalize(pathChi, ["male"], ".", N, Fstep, FMIN, FMAX);
     rezCFsize = size(rezCF);
     rezCFsize = rezCFsize(1,2)
     rezCFSum = transpose(sum((transpose(rezCF)))) ./ rezCFsize;
@@ -42,16 +43,16 @@ if ~exist('rezMSum', 'var')
 end
 
 
-N = 50;
+N = 200;
 [QrezM, f11] = loadReadAnalize(path, ["female"], ".mp3", N, Fstep, FMIN, FMAX);
 [QrezF, f21] = loadReadAnalize(path, ["male"], ".mp3", N, Fstep, FMIN, FMAX);
-[QrezCM, f31] = loadReadAnalize(pathChi, ["female"], ".mp3", N, Fstep, FMIN, FMAX);
-[QrezCF, f41] = loadReadAnalize(pathChi, ["male"], ".mp3", N, Fstep, FMIN, FMAX);
+[QrezCM, f31] = loadReadAnalize(pathChi, ["female"], ".", N, Fstep, FMIN, FMAX);
+[QrezCF, f41] = loadReadAnalize(pathChi, ["male"], ".", N, Fstep, FMIN, FMAX);
 
 
 %musko
 resultsM = zeros(1, 4);
-for i=1:50
+for i=1:200
     corrs = zeros(1,4);
     corr = corrcoef(rezMSum, QrezM(:,i));
     corrs(1) = corr(1,2);
@@ -73,7 +74,7 @@ end
 
 %zensko
 resultsF = zeros(1, 4);
-for i=1:50
+for i=1:200
     corrs = zeros(1,4);
     corr = corrcoef(rezMSum, QrezF(:,i));
     corrs(1) = corr(1,2);
@@ -95,7 +96,7 @@ end
 
 %dijete zensko
 resultsCM = zeros(1, 4);
-for i=1:19
+for i=1:43
     corrs = zeros(1,4);
     corr = corrcoef(rezMSum, QrezCM(:,i));
     corrs(1) = corr(1,2);
@@ -117,7 +118,7 @@ end
 
 %dijete zensko
 resultsCF = zeros(1, 4);
-for i=1:21
+for i=1:10
     corrs = zeros(1,4);
     corr = corrcoef(rezMSum, QrezCF(:,i));
     corrs(1) = corr(1,2);
