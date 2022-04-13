@@ -3,7 +3,7 @@ close all
 clc
 
 
-N = 2000;
+N = 100;
 
 path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
 pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
@@ -11,10 +11,10 @@ pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
 %path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
 %pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
 
-[Mv,f] = loadReadAnalize(pathMozilla, ["female"], ".mp3", N, 0.5,61,400);
-[Fv,f] = loadReadAnalize(pathMozilla, ["male"], ".mp3", N, 0.5,61,400);
-[CMv,f] = loadReadAnalize(pathChildren, ["female"], ".mp3", N, 0.5,61,400);
-[CFv,f] = loadReadAnalize(pathChildren, ["male"], ".mp3", N, 0.5,61,400);
+[Mv,f] = loadReadAnalize(path, ["female"], ".mp3", N, 0.5,61,400);
+[Fv,f] = loadReadAnalize(path, ["male"], ".mp3", N, 0.5,61,400);
+[CMv,f] = loadReadAnalize(pathChi, ["female"], ".mp3", N, 0.5,61,400);
+[CFv,f] = loadReadAnalize(pathChi, ["male"], ".mp3", N, 0.5,61,400);
 
 nM = size(Mv);
 nM = nM(1,2);
@@ -28,9 +28,6 @@ nCM = nCM(1,2);
 nCF = size(CFv);
 nCF = nCF(1,2);
 
-nPowers = size(powers);
-nPowers = nPowers(1,2);
-
 freqVectorSize = size(f);
 freqVectorSize = freqVectorSize(1,1);
 
@@ -43,38 +40,46 @@ cd obrada\
 
 "M"
 for j=1:nM
-    Mrez = Mrez + FindLowPowerBand(f,Mv(:,j), powers(i));
+    Mrez = Mrez + averageFreq(f,Mv(:,j), powers(i));
 end
 
 "F"
 for j=1:nF
-    Frez = Frez + FindLowPowerBand(f,Fv(:,j), powers(i));    
+    Frez = Frez + averageFreq(f,Fv(:,j), powers(i));    
 end
 
 
 "CM"
 for j=1:nCM
-    CMrez= CMrez + FindLowPowerBand(f,CMv(:,j), powers(i));
+    CMrez= CMrez + averageFreq(f,CMv(:,j), powers(i));
 end
 
 
 "CF"
 for j=1:nCF
-    CFrez = CFrez + FindLowPowerBand(f,CFv(:,j), powers(i));    
+    CFrez = CFrez + averageFreq(f,CFv(:,j), powers(i));    
 end
+
+
+Mrez = Mrez/nM;
+Frez = Frez/nF;
+CMrez = CMrez/nCM;
+CFrez = CFrez/nCF;
 
 figure
 plot(f, [Mrez, Frez, CMrez, CFrez]);
 
 
 
+
+
+
+
+
+
+
 figure
 hold on
-Mrez = Mrez/nM;
-Frez = Frez/nF;
-CMrez = CMrez/nCM;
-CFrez = CFrez/nCF;
-
 %M
 [ampM, srM, sigM] = gaussFiting(f,Mrez);
 gauss = ampM * exp(-(f-srM).^2/(2*sigM^2));

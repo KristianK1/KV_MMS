@@ -3,7 +3,7 @@ close all
 clc
 
 
-N = 2000;
+N = 200;
 
 path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
 pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
@@ -11,10 +11,11 @@ pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
 %path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
 %pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
 
-[Mv,f] = loadReadAnalize(pathMozilla, ["female"], ".mp3", N, 0.5,61,400);
-[Fv,f] = loadReadAnalize(pathMozilla, ["male"], ".mp3", N, 0.5,61,400);
-[CMv,f] = loadReadAnalize(pathChildren, ["female"], ".mp3", N, 0.5,61,400);
-[CFv,f] = loadReadAnalize(pathChildren, ["male"], ".mp3", N, 0.5,61,400);
+
+[Mv,f] = loadReadAnalize(path, ["female"], ".mp3", N, 0.5,61,400);
+[Fv,f] = loadReadAnalize(path, ["male"], ".mp3", N, 0.5,61,400);
+[CMv,f] = loadReadAnalize(pathChi, ["female"], ".mp3", N, 0.5,61,400);
+[CFv,f] = loadReadAnalize(pathChi, ["male"], ".mp3", N, 0.5,61,400);
 
 nM = size(Mv);
 nM = nM(1,2);
@@ -63,17 +64,26 @@ for j=1:nCF
     CFrez = CFrez + FindLowPowerBand(f,CFv(:,j), powers(i));    
 end
 
+
+Mrez = Mrez/nM;
+Frez = Frez/nF;
+CMrez = CMrez/nCM;
+CFrez = CFrez/nCF;
+
 figure
 plot(f, [Mrez, Frez, CMrez, CFrez]);
 
 
 
+
+
+
+
+
+
+
 figure
 hold on
-Mrez = Mrez/nM;
-Frez = Frez/nF;
-CMrez = CMrez/nCM;
-CFrez = CFrez/nCF;
 
 %M
 [ampM, srM, sigM] = gaussFiting(f,Mrez);
