@@ -36,7 +36,6 @@ function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, m
         [f,a] = pojasni_propust(f, a, minF, maxF);
         [f,a] = freqScaling(f,a, freqStep, maxF);
         [f,a] = powerScaling(f, a, 1);
-        
         if cmnExist == 0
             cmnExist = 1;
             commonF = f;

@@ -15,9 +15,6 @@ function [amp, mi, sig] = gaussFiting(f,a)
     
     %za ispis gauss
     %gauss = amp * exp(-(f-mi).^2/(2*sig^2));
-    integral = sum(sum(gauss))
-    plot(f,gauss)
-
 
 
 end

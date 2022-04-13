@@ -1,9 +1,9 @@
 clc
 clearvars -except femaleAvg
-folders = ["male","teens"];
+folders = ["male"];
 %initialPath ="D:\KV_MMS\voices_repo\children";
 %initialPath ="D:\KV_MMS\voices_repo\mozilla8";
-initialPath ="C:\KV_MMS\voices_repo\mozilla_stuff";
+initialPath ="C:\KV_MMS_voices_repo\mozilla_stuff";
 
 result = readFilePaths(initialPath, folders, "mp3");
 "readPaths"
@@ -32,7 +32,6 @@ while (Nsamples < wantedSamples)
     %sound(y,Fs);
     %pause(time + 1);
     if(time<=2)
-        %osim za children
         if(Nsamples<=wantedSamples)
             "nastavljeno"
             continue;

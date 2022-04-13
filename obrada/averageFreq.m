@@ -1,4 +1,5 @@
-function outf = averageFreq(f,a)
+function outf = averageFreq(a,f)
+
 sizee = size(f);
 sizee = sizee(1,1);
 
