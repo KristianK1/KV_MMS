@@ -3,7 +3,7 @@ close all
 clc
 
 
-N = 100;
+N = 5000;
 
 path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
 pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
@@ -11,10 +11,15 @@ pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
 %path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
 %pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
 
+%{
 [Mv,f] = loadReadAnalize(path, ["female"], ".mp3", N, 0.5,61,400);
 [Fv,f] = loadReadAnalize(path, ["male"], ".mp3", N, 0.5,61,400);
 [CMv,f] = loadReadAnalize(pathChi, ["female"], ".mp3", N, 0.5,61,400);
 [CFv,f] = loadReadAnalize(pathChi, ["male"], ".mp3", N, 0.5,61,400);
+%}
+
+load rezultati\justUseThis.mat
+[Fv,f] = loadReadAnalize(path, ["male"], ".mp3", N, 0.5,61,400);
 
 nM = size(Mv);
 nM = nM(1,2);
@@ -40,24 +45,24 @@ cd obrada\
 
 "M"
 for j=1:nM
-    Mrez = Mrez + averageFreq(f,Mv(:,j), powers(i));
+    Mrez = Mrez + averageFreq(Mv(:,j), f);
 end
 
 "F"
 for j=1:nF
-    Frez = Frez + averageFreq(f,Fv(:,j), powers(i));    
+    Frez = Frez + averageFreq(Fv(:,j), f);    
 end
 
 
 "CM"
 for j=1:nCM
-    CMrez= CMrez + averageFreq(f,CMv(:,j), powers(i));
+    CMrez= CMrez + averageFreq(CMv(:,j), f);
 end
 
 
 "CF"
 for j=1:nCF
-    CFrez = CFrez + averageFreq(f,CFv(:,j), powers(i));    
+    CFrez = CFrez + averageFreq(CFv(:,j), f);    
 end
 
 
@@ -82,26 +87,26 @@ figure
 hold on
 %M
 [ampM, srM, sigM] = gaussFiting(f,Mrez);
-gauss = ampM * exp(-(f-srM).^2/(2*sigM^2));
-plot(f,gauss)
+Mgauss = ampM * exp(-(f-srM).^2/(2*sigM^2));
+plot(f, Mgauss)
 
 
 %F
 [ampF, srF, sigF] = gaussFiting(f,Frez);
-gauss = ampF * exp(-(f-srF).^2/(2*sigF^2));
-plot(f,gauss)
+Fgauss = ampF * exp(-(f-srF).^2/(2*sigF^2));
+plot(f, Fgauss)
 
 
 %CM
 [ampCM, srCM, sigCM] = gaussFiting(f,CMrez);
-gauss = ampCM * exp(-(f-srCM).^2/(2*sigCM^2));
-plot(f,gauss)
+CMgauss = ampCM * exp(-(f-srCM).^2/(2*sigCM^2));
+plot(f, CMgauss)
 
 
 %CF
 [ampCF, srCF, sigCF] = gaussFiting(f,CFrez);
-gauss = ampCF * exp(-(f-srCF).^2/(2*sigCF^2));
-plot(f,gauss)
+CFgauss = ampCF * exp(-(f-srCF).^2/(2*sigCF^2));
+plot(f, CFgauss)
 
 
 cd ..

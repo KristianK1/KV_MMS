@@ -1,4 +1,4 @@
-function outF = FindLowPowerBand(f, a, Power)
+function outF = FindLowPowerBand(a, f, Power)
     sizee = size(f);
     sizee=sizee(1,1);
     
