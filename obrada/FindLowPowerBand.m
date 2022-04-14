@@ -1,4 +1,4 @@
-function outF = FindLowPowerBand(a, f, Power)
+function [outF, exactFreq] = FindLowPowerBand(a, f, Power)
     sizee = size(f);
     sizee=sizee(1,1);
     
@@ -8,6 +8,7 @@ function outF = FindLowPowerBand(a, f, Power)
         powerSum = powerSum + a(i)*a(i);
         if(powerSum>=Power)
             outF(i,1) = 1;
+            exactFreq = f(i,1);
             break;
         end
     end

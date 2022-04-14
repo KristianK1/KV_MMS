@@ -1,4 +1,4 @@
-clear all
+clearvars -except values_O2 values_O3
 close all
 clc
 
@@ -93,29 +93,40 @@ hold on
 [ampM, srM, sigM] = gaussFiting(f,Mrez);
 gauss = ampM * exp(-(f-srM).^2/(2*sigM^2));
 plot(f,gauss)
-pause(1)
 
 %F
 [ampF, srF, sigF] = gaussFiting(f,Frez);
 gauss = ampF * exp(-(f-srF).^2/(2*sigF^2));
 plot(f,gauss)
-pause(1)
 
 %CM
 [ampCM, srCM, sigCM] = gaussFiting(f,CMrez);
 gauss = ampCM * exp(-(f-srCM).^2/(2*sigCM^2));
 plot(f,gauss)
-pause(1)
 
 %CF
 [ampCF, srCF, sigCF] = gaussFiting(f,CFrez);
 gauss = ampCF * exp(-(f-srCF).^2/(2*sigCF^2));
 plot(f,gauss)
-pause(1)
 
 cd ..
 
+values_O1.M.amp = ampM;
+values_O1.M.mi = srM;
+values_O1.M.sig = sigM;
 
+values_O1.F.amp = ampF;
+values_O1.F.mi = srF;
+values_O1.F.sig = sigF;
 
+values_O1.CM.amp = ampCM;
+values_O1.CM.mi = srCM;
+values_O1.CM.sig = sigCM;
+
+values_O1.CF.amp = ampCF;
+values_O1.CF.mi = srCF;
+values_O1.CF.sig = sigCF;
+
+clearvars -except values_O1 values_O2 values_O3
 
 

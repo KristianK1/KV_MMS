@@ -1,6 +1,6 @@
 function [amp, mi, sig] = gaussFiting(f,a)
 
-    fitting = fit(f, a,'gauss2')
+    fitting = fit(f, a,'gauss1')
     
     mi = fitting.b1;
     sig = fitting.c1;

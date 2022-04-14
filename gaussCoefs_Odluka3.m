@@ -1,4 +1,4 @@
-clear all
+clearvars -except values_O1 values_O2
 close all
 clc
 
@@ -19,7 +19,6 @@ pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
 %}
 
 load rezultati\justUseThis.mat
-[Fv,f] = loadReadAnalize(path, ["male"], ".mp3", N, 0.5,61,400);
 
 nM = size(Mv);
 nM = nM(1,2);
@@ -108,10 +107,24 @@ plot(f, CMgauss)
 CFgauss = ampCF * exp(-(f-srCF).^2/(2*sigCF^2));
 plot(f, CFgauss)
 
-
 cd ..
 
 
+values_O3.M.amp = ampM;
+values_O3.M.mi = srM;
+values_O3.M.sig = sigM;
+
+values_O3.F.amp = ampF;
+values_O3.F.mi = srF;
+values_O3.F.sig = sigF;
+
+values_O3.CM.amp = ampCM;
+values_O3.CM.mi = srCM;
+values_O3.CM.sig = sigCM;
+
+values_O3.CF.amp = ampCF;
+values_O3.CF.mi = srCF;
+values_O3.CF.sig = sigCF;
 
 
-
+clearvars -except values_O1 values_O2 values_O3
