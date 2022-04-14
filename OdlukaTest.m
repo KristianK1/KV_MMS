@@ -7,7 +7,7 @@ pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
 %path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
 %pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
 
-foldersIgnore = ["female"];
+foldersIgnore = ["male"];
 
 cd citanje
 files = readFilePaths(path, foldersIgnore, ".mp3");
@@ -34,7 +34,7 @@ rezs_O3 = zeros(1,4);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-showFigures = 0;
+showFigures = 0
 
 
 for i = 1:N
@@ -79,7 +79,7 @@ for i = 1:N
     end
     
     
-    probs = probs .* [1 0.7 0.7 1];
+    %probs = probs .* [0.8 1 1 0.8];
     
     if showFigures
         subplot(2,3,5);
@@ -89,15 +89,7 @@ for i = 1:N
 
 
     %gdje je najveca vjerovatnost
-    %[~,I] = max(probs,[],'all','linear');
-    
-    
-    I = 0;
-    for r=1:4
-        I = I + r * probs(1,r);
-    end
-    I
-    I = round(I)
+    [~,I] = max(probs,[],'all','linear');
 
     rezs(1,I) = rezs(1,I) + 1;
 end
