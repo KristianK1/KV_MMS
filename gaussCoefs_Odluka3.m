@@ -1,38 +1,16 @@
-clearvars -except values_O1 values_O2
-close all
-clc
-
-
-N = 5000;
-
-path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
-pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
-
-%path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
-%pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
-
-%{
-[Mv,f] = loadReadAnalize(path, ["female"], ".mp3", N, 0.5,61,400);
-[Fv,f] = loadReadAnalize(path, ["male"], ".mp3", N, 0.5,61,400);
-[CMv,f] = loadReadAnalize(pathChi, ["female"], ".mp3", N, 0.5,61,400);
-[CFv,f] = loadReadAnalize(pathChi, ["male"], ".mp3", N, 0.5,61,400);
-%}
-
-load rezultati\justUseThis.mat
-
-nM = size(Mv);
+nM = size(Mv_O3);
 nM = nM(1,2);
 
-nF = size(Fv);
+nF = size(Fv_O3);
 nF = nF(1,2);
 
-nCM = size(CMv);
+nCM = size(CMv_O3);
 nCM = nCM(1,2);
 
-nCF = size(CFv);
+nCF = size(CFv_O3);
 nCF = nCF(1,2);
 
-freqVectorSize = size(f);
+freqVectorSize = size(f_O3);
 freqVectorSize = freqVectorSize(1,1);
 
 Mrez = zeros(freqVectorSize,1);
@@ -44,24 +22,28 @@ cd obrada\
 
 "M"
 for j=1:nM
-    Mrez = Mrez + averageFreq(Mv(:,j), f);
+    [tmp, ~] = averageFreq(Mv_O3(:,j),f_O3);
+    Mrez = Mrez + tmp;
 end
 
 "F"
 for j=1:nF
-    Frez = Frez + averageFreq(Fv(:,j), f);    
+    [tmp, ~] = averageFreq(Fv_O3(:,j),f_O3);
+    Frez = Frez + tmp;
 end
 
 
 "CM"
 for j=1:nCM
-    CMrez= CMrez + averageFreq(CMv(:,j), f);
+    [tmp, ~] = averageFreq(CMv_O3(:,j),f_O3);
+    CMrez= CMrez + tmp;
 end
 
 
 "CF"
 for j=1:nCF
-    CFrez = CFrez + averageFreq(CFv(:,j), f);    
+    [tmp, ~] = averageFreq(CFv_O3(:,j),f_O3);    
+    CFrez = CFrez + tmp;   
 end
 
 
@@ -71,7 +53,10 @@ CMrez = CMrez/nCM;
 CFrez = CFrez/nCF;
 
 figure
-plot(f, [Mrez, Frez, CMrez, CFrez]);
+plot(f_O3, [Mrez, Frez, CMrez, CFrez]);
+grid
+title("rezultati algoritma za Odluku 3");
+legend(["male", "female", "child male", "child female"]);
 
 
 
@@ -83,30 +68,34 @@ plot(f, [Mrez, Frez, CMrez, CFrez]);
 
 
 figure
+grid
+title("Odluka 3 gauss curves");
 hold on
 %M
-[ampM, srM, sigM] = gaussFiting(f,Mrez);
-Mgauss = ampM * exp(-(f-srM).^2/(2*sigM^2));
-plot(f, Mgauss)
+[ampM, srM, sigM] = gaussFiting(f_O3,Mrez);
+Mgauss = ampM * exp(-(f_O3-srM).^2/(2*sigM^2));
+plot(f_O3, Mgauss)
 
 
 %F
-[ampF, srF, sigF] = gaussFiting(f,Frez);
-Fgauss = ampF * exp(-(f-srF).^2/(2*sigF^2));
-plot(f, Fgauss)
+[ampF, srF, sigF] = gaussFiting(f_O3,Frez);
+Fgauss = ampF * exp(-(f_O3-srF).^2/(2*sigF^2));
+plot(f_O3, Fgauss)
 
 
 %CM
-[ampCM, srCM, sigCM] = gaussFiting(f,CMrez);
-CMgauss = ampCM * exp(-(f-srCM).^2/(2*sigCM^2));
-plot(f, CMgauss)
+[ampCM, srCM, sigCM] = gaussFiting(f_O3,CMrez);
+CMgauss = ampCM * exp(-(f_O3-srCM).^2/(2*sigCM^2));
+plot(f_O3, CMgauss)
 
 
 %CF
-[ampCF, srCF, sigCF] = gaussFiting(f,CFrez);
-CFgauss = ampCF * exp(-(f-srCF).^2/(2*sigCF^2));
-plot(f, CFgauss)
+[ampCF, srCF, sigCF] = gaussFiting(f_O3,CFrez);
+CFgauss = ampCF * exp(-(f_O3-srCF).^2/(2*sigCF^2));
+plot(f_O3, CFgauss)
 
+
+legend(["male", "female", "child male", "child female"]);
 cd ..
 
 
@@ -126,5 +115,6 @@ values_O3.CF.amp = ampCF;
 values_O3.CF.mi = srCF;
 values_O3.CF.sig = sigCF;
 
-
-clearvars -except values_O1 values_O2 values_O3
+values_O3.Fmin = FMIN_O3;
+values_O3.Fmax = FMAX_O3;
+values_O3.fstep = Fstep_O3;

@@ -31,11 +31,14 @@ function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, m
         if sizeY/Fs < (1/freqStep)
             continue
         end
-        
-        [f,a] = furier(y,Fs);
-        [f,a] = pojasni_propust(f, a, minF, maxF);
-        [f,a] = freqScaling(f,a, freqStep, maxF);
-        [f,a] = powerScaling(f, a, 1);
+        try
+            [f,a] = furier(y,Fs);
+            [f,a] = pojasni_propust(f, a, minF, maxF);
+            [f,a] = freqScaling(f,a, freqStep, maxF);
+            [f,a] = powerScaling(f, a, 1);
+        catch e
+            continue
+        end
         if cmnExist == 0
             cmnExist = 1;
             commonF = f;

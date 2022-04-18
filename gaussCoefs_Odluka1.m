@@ -1,40 +1,17 @@
-clearvars -except values_O2 values_O3
-close all
-clc
-
-
-N = 200;
-
-path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
-pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
-
-%path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
-%pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
-
-%{
-[Mv,f] = loadReadAnalize(path, ["female"], ".mp3", N, 0.5,61,400);
-[Fv,f] = loadReadAnalize(path, ["male"], ".mp3", N, 0.5,61,400);
-[CMv,f] = loadReadAnalize(pathChi, ["female"], ".mp3", N, 0.5,61,400);
-[CFv,f] = loadReadAnalize(pathChi, ["male"], ".mp3", N, 0.5,61,400);
-%}
-
-
-load rezultati\justUseThis.mat
-
-nM = size(Mv);
+nM = size(Mv_O1);
 nM = nM(1,2);
 
-nF = size(Fv);
+nF = size(Fv_O1);
 nF = nF(1,2);
 
-nCM = size(CMv);
+nCM = size(CMv_O1);
 nCM = nCM(1,2);
 
-nCF = size(CFv);
+nCF = size(CFv_O1);
 nCF = nCF(1,2);
 
 
-freqVectorSize = size(f);
+freqVectorSize = size(f_O1);
 freqVectorSize = freqVectorSize(1,1);
 
 Mrez = zeros(freqVectorSize,1);
@@ -42,30 +19,34 @@ Frez = zeros(freqVectorSize,1);
 CMrez = zeros(freqVectorSize,1);
 CFrez = zeros(freqVectorSize,1);
 
-power = 0.03;
+power = 0.005;
 
 cd obrada\
 
 "M"
 for j=1:nM
-    Mrez = Mrez + FindLowPowerBand(Mv(:,j), f, power);
+    [tmp, ~] = FindLowPowerBand(Mv_O1(:,j), f_O1, power);
+    Mrez = Mrez + tmp;
 end
 
 "F"
 for j=1:nF
-    Frez = Frez + FindLowPowerBand(Fv(:,j), f, power);    
+    [tmp, ~] = FindLowPowerBand(Fv_O1(:,j), f_O1, power);
+    Frez = Frez + tmp;
 end
 
 
 "CM"
 for j=1:nCM
-    CMrez= CMrez + FindLowPowerBand(CMv(:,j), f, power);
+    [tmp, ~] = FindLowPowerBand(CMv_O1(:,j), f_O1, power);
+    CMrez= CMrez + tmp;
 end
 
 
 "CF"
 for j=1:nCF
-    CFrez = CFrez + FindLowPowerBand(CFv(:,j), f, power);    
+    [tmp, ~] = FindLowPowerBand(CFv_O1(:,j), f_O1, power);
+    CFrez = CFrez + tmp;    
 end
 
 
@@ -75,39 +56,40 @@ CMrez = CMrez/nCM;
 CFrez = CFrez/nCF;
 
 figure
-plot(f, [Mrez, Frez, CMrez, CFrez]);
-
-
-
-
-
-
-
+grid
+plot(f_O1, [Mrez, Frez, CMrez, CFrez]);
+title("rezultati algoritma za Odluku 1");
+legend(["male", "female", "child male", "child female"]);
 
 
 
 figure
+title("Odluka 1 gauss curves");
+grid
 hold on
 
 %M
-[ampM, srM, sigM] = gaussFiting(f,Mrez);
-gauss = ampM * exp(-(f-srM).^2/(2*sigM^2));
-plot(f,gauss)
+[ampM, srM, sigM] = gaussFiting(f_O1,Mrez);
+gauss = ampM * exp(-(f_O1-srM).^2/(2*sigM^2));
+plot(f_O1,gauss)
 
 %F
-[ampF, srF, sigF] = gaussFiting(f,Frez);
-gauss = ampF * exp(-(f-srF).^2/(2*sigF^2));
-plot(f,gauss)
+[ampF, srF, sigF] = gaussFiting(f_O1,Frez);
+gauss = ampF * exp(-(f_O1-srF).^2/(2*sigF^2));
+plot(f_O1,gauss)
 
 %CM
-[ampCM, srCM, sigCM] = gaussFiting(f,CMrez);
-gauss = ampCM * exp(-(f-srCM).^2/(2*sigCM^2));
-plot(f,gauss)
+[ampCM, srCM, sigCM] = gaussFiting(f_O1,CMrez);
+gauss = ampCM * exp(-(f_O1-srCM).^2/(2*sigCM^2));
+plot(f_O1,gauss)
 
 %CF
-[ampCF, srCF, sigCF] = gaussFiting(f,CFrez);
-gauss = ampCF * exp(-(f-srCF).^2/(2*sigCF^2));
-plot(f,gauss)
+[ampCF, srCF, sigCF] = gaussFiting(f_O1,CFrez);
+gauss = ampCF * exp(-(f_O1-srCF).^2/(2*sigCF^2));
+plot(f_O1,gauss)
+
+
+legend(["male", "female", "child male", "child female"]);
 
 cd ..
 
@@ -127,6 +109,10 @@ values_O1.CF.amp = ampCF;
 values_O1.CF.mi = srCF;
 values_O1.CF.sig = sigCF;
 
-clearvars -except values_O1 values_O2 values_O3
+values_O1.Fmin = FMIN_O1;
+values_O1.Fmax = FMAX_O1;
+values_O1.fstep = Fstep_O1;
+
+
 
 
