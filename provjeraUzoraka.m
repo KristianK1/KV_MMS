@@ -2,7 +2,10 @@ clear all
 close all
 clc
 
-path = "D:\KV_MMS_voices_repo\children_snimljeno";
+%path = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
+path = "C:\KV_MMS_voices_repo\children_snimljeno"; %laptop Kristian
+
+
 ext = ".mp3";
 N = 100;
 freqStep = 0.5;
@@ -21,8 +24,10 @@ if(sizee<N)
     samples = sizee;
     "Dostupno je samo " + samples + " uzoraka."
 else
-    samples = round(N*1.25);
+    samples = N;
 end
+
+
 files = files(1:samples, 1);
 
 

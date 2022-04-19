@@ -1,16 +1,16 @@
 clearvars -except values
 clc
 
-path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
-pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
+%path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
+%pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
 
-%path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
-%pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
+path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
+pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
 
-foldersIgnore = ["male"];
+foldersIgnore = ["female"];
 
 cd citanje
-files = readFilePaths(path, foldersIgnore, ".mp3");
+files = readFilePaths(pathChi, foldersIgnore, ".mp3");
 cd ..
 files = files(randperm(numel(files)));
 
@@ -18,7 +18,7 @@ Nfiles = size(files);
 Nfiles = Nfiles(1,1);
 
 
-wantedN = 200;
+wantedN = 50;
 
 if wantedN > Nfiles 
     N = Nfiles;
@@ -68,9 +68,9 @@ for i = 1:N
     [~,I] = max(probs(3,:),[],'all','linear');
     rezs_O3(1,I) = rezs_O3(1,I) + 1;
 
-    t1 = 1;
-    t2 = 1;
-    t3 = 0.6;
+    t1 = 0.6;
+    t2 = 0.72;
+    t3 = 0.4;
     probs = (t1 * probs(1,:) + t2 * probs(2,:) + t3 * probs(3,:)) / (t1 + t2 + t3)
 
     if showFigures
@@ -79,12 +79,12 @@ for i = 1:N
     end
     
     
-    %probs = probs .* [0.8 1 1 0.8];
+    probs = probs .* [1 0.8 0.8 1];
     
     if showFigures
         subplot(2,3,5);
         bar(probs)
-        pause(5)
+        pause(2)
     end
 
 

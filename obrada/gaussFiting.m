@@ -7,9 +7,9 @@ function [amp, mi, sig] = gaussFiting(f,a)
     
     
     %korekcija na 25%
-    corr_factor = 0.25 * 1/sqrt(2/pi) 
+    corr_factor = 0.25 * 1/sqrt(2/pi);
     
-    amp = corr_factor * 1/(2*pi*sig)
+    amp = corr_factor * 1/(2*pi*sig);
     
     %gauss = 1/(2*pi*sd)*exp(-(f-mu).^2/(2*sd^2));
     
