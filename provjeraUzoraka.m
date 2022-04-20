@@ -2,9 +2,10 @@ clear all
 close all
 clc
 
-%path = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
-path = "C:\KV_MMS_voices_repo\children_snimljeno"; %laptop Kristian
+path = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
+%path = "C:\KV_MMS_voices_repo\children_snimljeno"; %laptop Kristian
 
+path = "D:\KV_MMS_voices_repo\DAMIR"; %PC Kristian
 
 ext = ".mp3";
 N = 100;
@@ -61,7 +62,7 @@ for i=1:samples
     grid
 
     sound(y,Fs);
-    pause(sizeY/Fs + 2);
+    pause(sizeY/Fs + 1);
     close all
 end
 

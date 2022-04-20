@@ -1,16 +1,16 @@
 clearvars -except values
 clc
 
-%path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
-%pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
+path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
+pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
 
-path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
-pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
+%path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
+%%%%%%%%%%pathChi = "C:\KV_MMS_voices_repo\children_max"; %Lenovo Kristian
 
 foldersIgnore = ["female"];
 
 cd citanje
-files = readFilePaths(pathChi, foldersIgnore, ".mp3");
+files = readFilePaths(path, foldersIgnore, ".mp3");
 cd ..
 files = files(randperm(numel(files)));
 
@@ -18,7 +18,7 @@ Nfiles = size(files);
 Nfiles = Nfiles(1,1);
 
 
-wantedN = 50;
+wantedN = 5000;
 
 if wantedN > Nfiles 
     N = Nfiles;
@@ -71,9 +71,11 @@ for i = 1:N
     t1 = 0.6;
     t2 = 0.72;
     t3 = 0.4;
-    probs = (t1 * probs(1,:) + t2 * probs(2,:) + t3 * probs(3,:)) / (t1 + t2 + t3)
+
+    probs = (t1 * probs(1,:) + t2 * probs(2,:) + t3 * probs(3,:)) / (t1 + t2 + t3);
 
     if showFigures
+        probs
         subplot(2,3,4);
         bar(probs)
     end

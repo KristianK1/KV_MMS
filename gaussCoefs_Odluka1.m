@@ -55,6 +55,7 @@ Frez = Frez/nF;
 CMrez = CMrez/nCM;
 CFrez = CFrez/nCF;
 
+
 figure
 grid
 plot(f_O1, [Mrez, Frez, CMrez, CFrez]);
