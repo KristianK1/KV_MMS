@@ -12,7 +12,7 @@ function probs = Odluka(path, values)
     sizeY = sizeY(1,1);
 
     if sizeY/Fs < 2
-        exc = MException('MATLAB:test', 'Length of sound less than %f seconds at path %s',1/freqStep, path);
+        exc = MException('MATLAB:test', 'Length of sound less than 2 seconds at path %s', path);
         throw(exc)
     end
 
@@ -20,7 +20,7 @@ function probs = Odluka(path, values)
     cd obrada
     
     [f1,a1] = furier(y,Fs);
-    [f1,a1] = pojasni_propust(f1, a1, values.O1.Fmin, values.O2.Fmax);
+    [f1,a1] = pojasni_propust(f1, a1, values.O1.Fmin, values.O1.Fmax);
     [f1,a1] = freqScaling(f1,a1, values.O1.fstep, values.O1.Fmax);
     [f1,a1] = powerScaling(f1, a1, 1);
 
@@ -40,8 +40,10 @@ function probs = Odluka(path, values)
     probs_O1 = zeros(1,4);
     probs_O2 = zeros(1,4);
     probs_O3 = zeros(1,4);
+
+
     %Odluka1
-    wantedPower = 0.02;
+    wantedPower = values.O1.power;
     [~, freq] = FindLowPowerBand(a1,f1,wantedPower);
 
 
@@ -66,8 +68,11 @@ function probs = Odluka(path, values)
     sig = values.O1.CF.sig;
     probs_O1(1,4) = amp * exp(-(freq-mi).^2/(2*sig^2));
 
-    probs_O1 = probs_O1/sum(probs_O1);
-
+    if sum(probs_O1) < 0.05
+        probs_O1 = [0.20 0.25 0.25 0.30];
+    else
+        probs_O1 = probs_O1/sum(probs_O1);
+    end
 
     %Odluka2
     

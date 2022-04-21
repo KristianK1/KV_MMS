@@ -20,27 +20,25 @@ CFrez = zeros(freqVectorSize,1);
 
 cd obrada\
 
-"M"
+
 for j=1:nM
     [tmp, ~] = averageFreq(Mv_O3(:,j),f_O3);
     Mrez = Mrez + tmp;
 end
 
-"F"
+
 for j=1:nF
     [tmp, ~] = averageFreq(Fv_O3(:,j),f_O3);
     Frez = Frez + tmp;
 end
 
 
-"CM"
 for j=1:nCM
     [tmp, ~] = averageFreq(CMv_O3(:,j),f_O3);
     CMrez= CMrez + tmp;
 end
 
 
-"CF"
 for j=1:nCF
     [tmp, ~] = averageFreq(CFv_O3(:,j),f_O3);    
     CFrez = CFrez + tmp;   

@@ -19,31 +19,27 @@ Frez = zeros(freqVectorSize,1);
 CMrez = zeros(freqVectorSize,1);
 CFrez = zeros(freqVectorSize,1);
 
-power = 0.005;
+power = 0.02;
 
 cd obrada\
 
-"M"
 for j=1:nM
     [tmp, ~] = FindLowPowerBand(Mv_O1(:,j), f_O1, power);
     Mrez = Mrez + tmp;
 end
 
-"F"
 for j=1:nF
     [tmp, ~] = FindLowPowerBand(Fv_O1(:,j), f_O1, power);
     Frez = Frez + tmp;
 end
 
 
-"CM"
 for j=1:nCM
     [tmp, ~] = FindLowPowerBand(CMv_O1(:,j), f_O1, power);
     CMrez= CMrez + tmp;
 end
 
 
-"CF"
 for j=1:nCF
     [tmp, ~] = FindLowPowerBand(CFv_O1(:,j), f_O1, power);
     CFrez = CFrez + tmp;    
@@ -113,6 +109,7 @@ values_O1.CF.sig = sigCF;
 values_O1.Fmin = FMIN_O1;
 values_O1.Fmax = FMAX_O1;
 values_O1.fstep = Fstep_O1;
+values_O1.power = power;
 
 
 

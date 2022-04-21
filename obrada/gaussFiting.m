@@ -4,17 +4,19 @@ function [amp, mi, sig] = gaussFiting(f,a)
     
     mi = fitting.b1;
     sig = fitting.c1;
-    
+    amp = fitting.a1;
     %korekcija na 25%
     %corr_factor = 0.25 * 1/sqrt(2/pi);
-    %amp = corr_factor * 1/(2*pi*sig);
+    %amp = corr_factor * 1/(2*pi*sig)
     
 
     %korekcija na istu visinu
     maxH = 1 * exp(-(mi-mi).^2/(2*sig^2));
     %               (  0  )
     amp = 1/maxH;
-
+    
+    
+    %amp = (1/maxH + amp) / 2;
 
 
 
