@@ -5,7 +5,8 @@ clc
 path = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
 %path = "C:\KV_MMS_voices_repo\children_snimljeno"; %laptop Kristian
 
-path = "D:\KV_MMS_voices_repo\DAMIR"; %PC Kristian
+path = "D:\KV_MMS_voices_repo\testPodaci"; %PC Kristian
+%path = "D:\KV_MMS_voices_repo\children_snimljeno";
 
 ext = ".mp3";
 N = 100;
@@ -49,6 +50,7 @@ for i=1:samples
         [f,a] = furier(y,Fs);
         [f,a] = pojasni_propust(f, a, minF, maxF);
         [f,a] = freqScaling(f,a, freqStep, maxF);
+        [f,a]  = removeNoise(f,a, 0.07);
         [f,a] = powerScaling(f, a, 1);
     catch e
         continue
@@ -62,7 +64,7 @@ for i=1:samples
     grid
 
     sound(y,Fs);
-    pause(sizeY/Fs + 1);
+    pause(sizeY/Fs);
     close all
 end
 

@@ -35,7 +35,13 @@ function [results, commonF] = loadReadAnalize(path, folders, ext, N, freqStep, m
             [f,a] = furier(y,Fs);
             [f,a] = pojasni_propust(f, a, minF, maxF);
             [f,a] = freqScaling(f,a, freqStep, maxF);
+            %figure(55)
+            %plot(f,a);
+            [f,a] = removeNoise(f,a, 0.07);
+            %figure(56);
+            %plot(f,a);
             [f,a] = powerScaling(f, a, 1);
+            %pause(2)
         catch e
             continue
         end

@@ -1,11 +1,16 @@
 clearvars -except values
 clc
 
-%path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
-%pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
+path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
+pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
+%pathChi = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
+pathRussian = "D:\KV_MMS_voices_repo\mozilla4_russian_sorted"
 
-path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
-pathChi = "C:\KV_MMS_voices_repo\laki"; %Lenovo Kristian
+
+pathTest = "D:\KV_MMS_voices_repo\testPodaci"
+
+%path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
+%pathChi = "C:\KV_MMS_voices_repo\laki"; %Lenovo Kristian
 
 foldersIgnore = ["male"];
 
@@ -18,7 +23,7 @@ Nfiles = size(files);
 Nfiles = Nfiles(1,1);
 
 
-wantedN = 700;
+wantedN = 200;
 
 if wantedN > Nfiles 
     N = Nfiles;
@@ -41,7 +46,11 @@ for i = 1:N
     if mod(i,100)== 0 && i~=0
         i/N
     end
-
+    
+    if showFigures
+        "Naziv fajla" + files(i,1)
+    end
+    
     try
         probs = Odluka(files(i,1), values);
     catch e
@@ -65,13 +74,13 @@ for i = 1:N
 
     [~,I] = max(probs(2,:),[],'all','linear');
     rezs_O2(1,I) = rezs_O2(1,I) + 1;
-
+    
     [~,I] = max(probs(3,:),[],'all','linear');
     rezs_O3(1,I) = rezs_O3(1,I) + 1;
 
     t1 = 0.6;
     t2 = 0.78;
-    t3 = 0.4;
+    t3 = 0.3;
 
     probs = (t1 * probs(1,:) + t2 * probs(2,:) + t3 * probs(3,:)) / (t1 + t2 + t3);
 
@@ -86,7 +95,7 @@ for i = 1:N
     if showFigures
         subplot(2,3,5);
         bar(probs)
-        pause(2)
+        pause(5)
     end
 
 

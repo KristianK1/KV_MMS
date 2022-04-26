@@ -1,11 +1,13 @@
 clc
 clearvars -except excel_data
 
-%excel_folderPath = "D:\KV_MMS\validated_fitlered_age_gender_first_50000.xlsx";
-excel_folderPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\validated.tsv";
+%excel_folderPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\validated.tsv";
+%files_currentPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\clips";
+%files_destinationPath = "D:\KV_MMS\voices_repo\mozilla8_repeat";
 
-files_currentPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\clips";
-files_destinationPath = "D:\KV_MMS\voices_repo\mozilla8_repeat";
+excel_folderPath = "D:\KV_MMS_voices_repo\mozzila_4_russian\validated.tsv";
+files_currentPath = "D:\KV_MMS_voices_repo\mozzila_4_russian\clips";
+files_destinationPath = "D:\KV_MMS_voices_repo\mozilla4_russian_sorted";
 
 if ~isfile(excel_folderPath)
     ME = MException("MATLAB:test", "Navedena datoteka ne postoji");
@@ -34,7 +36,7 @@ N = N(1,1);
 
 for i=1:N
     
-    if(mod(i,10000)==0)
+    if(mod(i,1000)==0)
         i/N*100
     end
     try

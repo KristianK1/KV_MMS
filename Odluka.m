@@ -69,7 +69,7 @@ function probs = Odluka(path, values)
     probs_O1(1,4) = amp * exp(-(freq-mi).^2/(2*sig^2));
 
     if sum(probs_O1) < 0.05
-        probs_O1 = [0.20 0.25 0.25 0.30];
+        probs_O1 = [0.24 0.25 0.25 0.26];
     else
         probs_O1 = probs_O1/sum(probs_O1);
     end
@@ -87,12 +87,31 @@ function probs = Odluka(path, values)
 
     corr = corrcoef(values.O2.CF, a2);
     probs_O2(1,4) = corr(1,2);
-    
+
+
+    figure(77)
+    subplot(1,2,1);
+    bar(probs_O2);
+
     %uklanjanje negativnih vrijednosti
     probs_O2 = (probs_O2 + abs(probs_O2)) / 2; 
+    tempZ = probs_O2;
+    try
+        [~,I22] = max(probs_O2,[],'all','linear');
+        [~,I23] = min(probs_O2,[],'all','linear');
+        maxV = probs_O2(I22);
+        minV = probs_O2(I23);
+        probs_O2 = (probs_O2 - minV) ./ (maxV - minV); %od 0.4 do 0.8 se mapira na 0 do 1 
+    catch e 
+        probs_O2 = tempZ;
+    end
+
     
+    probs_O2 = (probs_O2 + abs(probs_O2)) / 2; 
+
     probs_O2 = probs_O2/sum(probs_O2);
-    
+    subplot(1,2,2)
+    bar(probs_O2);
     %Odluka3
     [~, freq] = averageFreq(a3,f3);
 
