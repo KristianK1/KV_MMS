@@ -89,9 +89,9 @@ function probs = Odluka(path, values)
     probs_O2(1,4) = corr(1,2);
 
 
-    figure(77)
-    subplot(1,2,1);
-    bar(probs_O2);
+    %figure(77)
+    %subplot(1,2,1);
+    %bar(probs_O2);
 
     %uklanjanje negativnih vrijednosti
     probs_O2 = (probs_O2 + abs(probs_O2)) / 2; 
@@ -110,8 +110,8 @@ function probs = Odluka(path, values)
     probs_O2 = (probs_O2 + abs(probs_O2)) / 2; 
 
     probs_O2 = probs_O2/sum(probs_O2);
-    subplot(1,2,2)
-    bar(probs_O2);
+    %subplot(1,2,2)
+    %bar(probs_O2);
     %Odluka3
     [~, freq] = averageFreq(a3,f3);
 

@@ -4,15 +4,15 @@ clc
 path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
 pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
 %pathChi = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
-pathRussian = "D:\KV_MMS_voices_repo\mozilla4_russian_sorted"
+%pathRussian = "D:\KV_MMS_voices_repo\mozilla4_russian_sorted"
 
 
-pathTest = "D:\KV_MMS_voices_repo\testPodaci"
+%pathTest = "D:\KV_MMS_voices_repo\testPodaci" %kad trebas jednog - dva
 
 %path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
 %pathChi = "C:\KV_MMS_voices_repo\laki"; %Lenovo Kristian
 
-foldersIgnore = ["male"];
+foldersIgnore = ["female"];
 
 cd citanje
 files = readFilePaths(path, foldersIgnore, ".mp3");
@@ -23,7 +23,7 @@ Nfiles = size(files);
 Nfiles = Nfiles(1,1);
 
 
-wantedN = 200;
+wantedN = ;
 
 if wantedN > Nfiles 
     N = Nfiles;

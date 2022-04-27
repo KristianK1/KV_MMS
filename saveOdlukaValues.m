@@ -12,7 +12,7 @@ pathTest = "D:\KV_MMS_voices_repo\children_snimljeno";
 
 
 
-N_O1 = 2000;
+N_O1 = 10000;
 FMIN_O1 = 62;
 FMAX_O1 = 500;
 Fstep_O1 = 1;
@@ -22,7 +22,7 @@ Fstep_O1 = 1;
 [CMv_O1, f_O1] = loadReadAnalize(pathChi, ["female"], ".mp3", N_O1, Fstep_O1, FMIN_O1, FMAX_O1);
 [CFv_O1, f_O1] = loadReadAnalize(pathChi, ["male"], ".mp3", N_O1, Fstep_O1, FMIN_O1, FMAX_O1);
 
-N_O2 = 2000;
+N_O2 = 10000;
 FMIN_O2 = 62;
 FMAX_O2 = 10000;
 Fstep_O2 = 2;
@@ -32,10 +32,10 @@ Fstep_O2 = 2;
 [CMv_O2, f_O2] = loadReadAnalize(pathChi, ["female"], ".mp3", N_O2, Fstep_O2, FMIN_O2, FMAX_O2);
 [CFv_O2, f_O2] = loadReadAnalize(pathChi, ["male"], ".mp3", N_O2, Fstep_O2, FMIN_O2, FMAX_O2);
 
-N_O3 = 2000;
+N_O3 = 10000;
 FMIN_O3 = 100;
 FMAX_O3 = 350;
-Fstep_O3 = 0.5;
+Fstep_O3 = 1;
 
 
 

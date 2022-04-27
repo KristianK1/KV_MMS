@@ -6,6 +6,8 @@ path = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
 %path = "C:\KV_MMS_voices_repo\children_snimljeno"; %laptop Kristian
 
 path = "D:\KV_MMS_voices_repo\testPodaci"; %PC Kristian
+path = "D:\Downloads\Još glasova\Još glasova\Muški"
+path = "D:\Downloads\274"
 %path = "D:\KV_MMS_voices_repo\children_snimljeno";
 
 ext = ".mp3";
