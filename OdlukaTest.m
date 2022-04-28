@@ -9,13 +9,13 @@ pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
 
 %pathTest = "D:\KV_MMS_voices_repo\testPodaci" %kad trebas jednog - dva
 
-%path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
-%pathChi = "C:\KV_MMS_voices_repo\laki"; %Lenovo Kristian
+path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
+pathChi = "C:\KV_MMS_voices_repo\Cdata"; %Lenovo Kristian
 
 foldersIgnore = ["female"];
 
 cd citanje
-files = readFilePaths(path, foldersIgnore, ".mp3");
+files = readFilePaths(pathChi, foldersIgnore, ".mp3");
 cd ..
 files = files(randperm(numel(files)));
 
@@ -23,7 +23,7 @@ Nfiles = size(files);
 Nfiles = Nfiles(1,1);
 
 
-wantedN = ;
+wantedN = 2000;
 
 if wantedN > Nfiles 
     N = Nfiles;
