@@ -1,11 +1,3 @@
 *.mp3
 *.wav
 *.asv
-rezultati/bigResult/loadReadAnalizeResult_F_50000_4Hz.mat
-rezultati/bigResult/loadReadAnalizeResult_F_50000_4Hz_freqs.mat
-rezultati/bigResult/loadReadAnalizeResult_M_50000_4Hz.mat
-massive_results-corr_coef_4Hz_n2_1000.mat
-corrCoef_analiza.m
-rezultati/loadReadAnalizeResult_F_5000_4Hz.mat
-rezultati/loadReadAnalizeResult_M_5000_4Hz.mat
-needed_for_analysis.mat

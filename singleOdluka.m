@@ -9,7 +9,7 @@ if(~exist("values", "var"))
     delete(msgboxx)
     [file,path] = uigetfile
     try
-        load(path)
+        load(append(path, file), "values")
     catch
         msgboxx = msgbox("Nije učitana datoteka sa podacima analize - izlazim iz koda");
         pause(2)
