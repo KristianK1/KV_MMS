@@ -1,10 +1,9 @@
 function probs = Odluka(path, values)
-
-
-
+    "pocetak odluke"
     try
         [y, Fs] = audioread(path, "double");
     catch e
+        "o jebemti boga"
         rethrow(e);
     end
 
@@ -41,7 +40,7 @@ function probs = Odluka(path, values)
     probs_O2 = zeros(1,4);
     probs_O3 = zeros(1,4);
 
-
+    "hello89"
     %Odluka1
     wantedPower = values.O1.power;
     [~, freq] = FindLowPowerBand(a1,f1,wantedPower);
@@ -75,7 +74,7 @@ function probs = Odluka(path, values)
     end
 
     %Odluka2
-    
+    "prije korelacije"
     corr = corrcoef(values.O2.M, a2);
     probs_O2(1,1) = corr(1,2);
 
@@ -87,7 +86,7 @@ function probs = Odluka(path, values)
 
     corr = corrcoef(values.O2.CF, a2);
     probs_O2(1,4) = corr(1,2);
-
+    "poslije korelacije"
 
     %figure(77)
     %subplot(1,2,1);
@@ -101,7 +100,7 @@ function probs = Odluka(path, values)
         [~,I23] = min(probs_O2,[],'all','linear');
         maxV = probs_O2(I22);
         minV = probs_O2(I23);
-        probs_O2 = (probs_O2 - minV) ./ (maxV - minV); %od 0.4 do 0.8 se mapira na 0 do 1 
+        probs_O2 = (probs_O2 - minV) ./ (maxV - minV);
     catch e 
         probs_O2 = tempZ;
     end
@@ -142,10 +141,18 @@ function probs = Odluka(path, values)
     cd ..
 
 
+    
 
 
 
 
+    probs = [probs_O1 ; probs_O2 ; probs_O3];
+    t1 = 0.37;
+    t2 = 0.444;
+    t3 = 0.186;
 
-    probs = [probs_O1 ; probs_O2 ; probs_O3]; 
+    probsTotal = (t1 * probs_O1 + t2 * probs_O2 + t3 * probs_O3) / (t1 + t2 + t3);
+
+    probs = [probs; probsTotal];
+    "kraj odluke"
 end

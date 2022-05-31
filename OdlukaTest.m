@@ -2,17 +2,17 @@ clearvars -except values
 clc
 
 path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
-pathChi = "D:\KV_MMS_voices_repo\laki"; %PC Kristian
+pathChi = "D:\KV_MMS_voices_repo\chiSve"; %PC Kristian
 %pathChi = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
 %pathRussian = "D:\KV_MMS_voices_repo\mozilla4_russian_sorted"
 
 
 %pathTest = "D:\KV_MMS_voices_repo\testPodaci" %kad trebas jednog - dva
 
-path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
-pathChi = "C:\KV_MMS_voices_repo\Cdata"; %Lenovo Kristian
+%path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
+%pathChi = "C:\KV_MMS_voices_repo\Cdata"; %Lenovo Kristian
 
-foldersIgnore = ["female"];
+foldersIgnore = ["male"];
 
 cd citanje
 files = readFilePaths(pathChi, foldersIgnore, ".mp3");
@@ -78,12 +78,7 @@ for i = 1:N
     [~,I] = max(probs(3,:),[],'all','linear');
     rezs_O3(1,I) = rezs_O3(1,I) + 1;
 
-    t1 = 0.6;
-    t2 = 0.78;
-    t3 = 0.3;
-
-    probs = (t1 * probs(1,:) + t2 * probs(2,:) + t3 * probs(3,:)) / (t1 + t2 + t3);
-
+    
     if showFigures
         probs
         subplot(2,3,4);
@@ -100,7 +95,7 @@ for i = 1:N
 
 
     %gdje je najveca vjerovatnost
-    [~,I] = max(probs,[],'all','linear');
+    [~,I] = max(probs(4,:),[],'all','linear');
 
     rezs(1,I) = rezs(1,I) + 1;
 end

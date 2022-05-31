@@ -8,13 +8,14 @@ path = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
 path = "D:\KV_MMS_voices_repo\testPodaci"; %PC Kristian
 path = "D:\Downloads\Još glasova\Još glasova\Muški"
 path = "D:\Downloads\274"
-%path = "D:\KV_MMS_voices_repo\children_snimljeno";
+
+path = "D:\KV_MMS_voices_repo\chiSve";
 
 ext = ".mp3";
 N = 100;
 freqStep = 0.5;
 minF = 62;
-maxF = 400;
+maxF = 500;
 
 
 cd citanje/
@@ -52,8 +53,11 @@ for i=1:samples
         [f,a] = furier(y,Fs);
         [f,a] = pojasni_propust(f, a, minF, maxF);
         [f,a] = freqScaling(f,a, freqStep, maxF);
-        [f,a]  = removeNoise(f,a, 0.07);
+        %[f,a]  = removeNoise(f,a, 0.07);
         [f,a] = powerScaling(f, a, 1);
+        [~,exactPower] = FindLowPowerBand(a,f,0.02);
+        exactPower
+
     catch e
         continue
     end
