@@ -1,13 +1,15 @@
 clc
 clearvars -except excel_data
 
-%excel_folderPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\validated.tsv";
-%files_currentPath = "D:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\clips";
-%files_destinationPath = "D:\KV_MMS\voices_repo\mozilla8_repeat";
+excel_folderPath = "E:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\validated.tsv";
+files_currentPath = "E:\cv-corpus-8.0-2022-01-19-en\cv-corpus-8.0-2022-01-19\en\clips";
+files_destinationPath = "D:\KV_MMS_voices_repo\mozilla8_onlyOnce";
 
-excel_folderPath = "D:\KV_MMS_voices_repo\mozzila_4_russian\validated.tsv";
-files_currentPath = "D:\KV_MMS_voices_repo\mozzila_4_russian\clips";
-files_destinationPath = "D:\KV_MMS_voices_repo\mozilla4_russian_sorted";
+%excel_folderPath = "D:\KV_MMS_voices_repo\mozzila_4_russian\validated.tsv";
+%files_currentPath = "D:\KV_MMS_voices_repo\mozzila_4_russian\clips";
+%files_destinationPath = "D:\KV_MMS_voices_repo\mozilla4_russian_sorted";
+
+userIds = ["beginID__randomCharsHere"];
 
 if ~isfile(excel_folderPath)
     ME = MException("MATLAB:test", "Navedena datoteka ne postoji");
@@ -32,7 +34,7 @@ N = N(1,1);
 "ucitano"
 
 
-
+duplic = 0;
 
 for i=1:N
     
@@ -52,6 +54,15 @@ for i=1:N
 
         gender = excel_data.gender(i,:);
         gender = gender(find(~isspace(gender)));
+
+        client_id = excel_data.client_id(i,:);
+
+        if(sum(sum(contains(userIds, client_id))) > 0)
+            %"Nasao duplic" + client_id
+            duplic = duplic + 1;
+            continue;
+        end
+        userIds = [userIds;client_id];
 
         if strcmp("", gender) || strcmp("", age)
             continue;
@@ -85,4 +96,5 @@ for i=1:N
         rethrow(error);
     end
 end
+duplic
 "end"

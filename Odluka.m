@@ -1,9 +1,7 @@
 function probs = Odluka(path, values)
-    "pocetak odluke"
     try
         [y, Fs] = audioread(path, "double");
     catch e
-        "o jebemti boga"
         rethrow(e);
     end
 
@@ -40,7 +38,6 @@ function probs = Odluka(path, values)
     probs_O2 = zeros(1,4);
     probs_O3 = zeros(1,4);
 
-    "hello89"
     %Odluka1
     wantedPower = values.O1.power;
     [~, freq] = FindLowPowerBand(a1,f1,wantedPower);
@@ -74,7 +71,6 @@ function probs = Odluka(path, values)
     end
 
     %Odluka2
-    "prije korelacije"
     corr = corrcoef(values.O2.M, a2);
     probs_O2(1,1) = corr(1,2);
 
@@ -86,7 +82,6 @@ function probs = Odluka(path, values)
 
     corr = corrcoef(values.O2.CF, a2);
     probs_O2(1,4) = corr(1,2);
-    "poslije korelacije"
 
     %figure(77)
     %subplot(1,2,1);
@@ -154,5 +149,4 @@ function probs = Odluka(path, values)
     probsTotal = (t1 * probs_O1 + t2 * probs_O2 + t3 * probs_O3) / (t1 + t2 + t3);
 
     probs = [probs; probsTotal];
-    "kraj odluke"
 end
