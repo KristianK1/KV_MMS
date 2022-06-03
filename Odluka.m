@@ -131,6 +131,8 @@ function probs = Odluka(path, values)
     sig = values.O3.CF.sig;
     probs_O3(1,4) = amp * exp(-(freq-mi).^2/(2*sig^2));
 
+    probs_O3 = probs_O3 .* [1 1 1 1.3];
+
     probs_O3 = probs_O3/sum(probs_O3);
 
     cd ..

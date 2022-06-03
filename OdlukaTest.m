@@ -1,21 +1,21 @@
 clearvars -except values
 clc
 
-path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
-pathChi = "D:\KV_MMS_voices_repo\chi_testiranje"; %PC Kristian
+%path ="D:\KV_MMS_voices_repo\mozilla8_repeat"; %PC Kristian
+%pathChi = "D:\KV_MMS_voices_repo\chi_testiranje"; %PC Kristian
 %pathChi = "D:\KV_MMS_voices_repo\children_snimljeno"; %PC Kristian
 %pathRussian = "D:\KV_MMS_voices_repo\mozilla4_russian_sorted"
 
 
 %pathTest = "D:\KV_MMS_voices_repo\testPodaci" %kad trebas jednog - dva
 
-%path = "C:\KV_MMS_voices_repo\mozilla_stuff"; %Lenovo Kristian
-%pathChi = "C:\KV_MMS_voices_repo\Cdata"; %Lenovo Kristian
+path = "C:\KV_MMS_voices_repo\mozzila8_onlyOnce_testiranje"; %Lenovo Kristian
+pathChi = "C:\KV_MMS_voices_repo\chi_testiranje"; %Lenovo Kristian
 
-foldersIgnore = ["female"];
+foldersIgnore = ["male"];
 
 cd citanje
-files = readFilePaths(path, foldersIgnore, ".mp3");
+files = readFilePaths(pathChi, foldersIgnore, ".mp3");
 cd ..
 files = files(randperm(numel(files)));
 
@@ -23,7 +23,7 @@ Nfiles = size(files);
 Nfiles = Nfiles(1,1);
 
 
-wantedN = 20;
+wantedN = 1000;
 
 if wantedN > Nfiles 
     N = Nfiles;

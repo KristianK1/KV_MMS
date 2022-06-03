@@ -40,6 +40,8 @@ if(file == 0)
 else
     probs = Odluka(append(path,file), values)
     [~,I22] = max(probs(4,:),[],'all','linear');
+    cats = ["MUŠKO", "ŽENSKO", "MUŠKO DIJETE", "ŽENSKO DIJETE"];
+    msgbox(cats(I22));
     I22
 end
 

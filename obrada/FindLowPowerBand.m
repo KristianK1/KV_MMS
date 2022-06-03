@@ -1,7 +1,7 @@
 function [outF, exactFreq] = FindLowPowerBand(a, f, Power)
     sizee = size(f);
     sizee=sizee(1,1);
-    
+
     powerSum = 0;
     outF = zeros(sizee,1);
     for i=1:sizee
